@@ -1,5 +1,9 @@
 ***Данный софт находится в альфа-версии и выложен для получения раннего фидбека. Вы используете его на свой страх и риск.***
 
+MACOS ONLY: for now, this plugin compiled for mac-compatible devices only. In case of other architecture you shoud manually compile `bin/parser` binary using the following command:
+```
+# cd upgrade-interactive-parser && go build -o ../bin/parser
+```
 
 ## Install
 ```
