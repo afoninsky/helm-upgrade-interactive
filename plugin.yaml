@@ -1,0 +1,4 @@
+name: upgrade-interactive
+version: "0.1.0"
+description: Upgrade all installed helm charts
+command: "$HELM_PLUGIN_DIR/script.sh"
