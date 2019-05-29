@@ -22,7 +22,7 @@ case $1 in
     ;;
 
   "bind" )
-    ./bin/parser -bind $2
+    $HELM_PLUGIN_DIR/bin/parser -bind $2
     ;;
 
   *)
@@ -32,7 +32,7 @@ case $1 in
 
     $HELM_BIN list --output json > $input
 
-    ./bin/parser -input $input -output $output
+    $HELM_PLUGIN_DIR/bin/parser -input $input -output $output
 
     while IFS=" " read -r release chart version
     do
