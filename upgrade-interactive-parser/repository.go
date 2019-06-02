@@ -142,13 +142,14 @@ func (r *Repository) Latest(name string, constraint *semver.Constraints, current
 
 func (r *Repository) Init() error {
 
+	helmPathRepositoryFile := os.Getenv("HELM_PATH_REPOSITORY_FILE")
 	helmPluginDir := os.Getenv("HELM_PLUGIN_DIR")
-	if helmPluginDir != "" {
-		r.bindingPath = fmt.Sprintf("%s/bindings.yml", helmPluginDir)
-	} else {
-		r.bindingPath = fmt.Sprintf("%s/helm-bindings.yml", os.Getenv("HOME"))
+	if helmPathRepositoryFile == "" || helmPluginDir == "" {
+		return errors.New("binary should be run as helm plugin")
 	}
 
+	r.bindingPath = fmt.Sprintf("%s/bindings.yml", helmPluginDir)
+	
 	if err := r.restoreBindings(); err != nil {
 		return err
 	}
@@ -157,7 +158,7 @@ func (r *Repository) Init() error {
 	r.deprecated = make(map[string]bool)
 
 	// get pathes to repositories caches
-	repoContent, repoErr := ioutil.ReadFile("/Users/drago/.helm/repository/repositories.yaml")
+	repoContent, repoErr := ioutil.ReadFile(helmPathRepositoryFile)
 	if repoErr != nil {
 		return repoErr
 	}

@@ -30,6 +30,8 @@ case $1 in
     output=$(mktemp /tmp/helm-upgrade-interactive.XXXXXX)
 
 
+    $HELM_BIN repo update
+
     $HELM_BIN list --output json > $input
 
     $HELM_PLUGIN_DIR/bin/parser -input $input -output $output
